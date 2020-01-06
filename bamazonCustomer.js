@@ -52,7 +52,7 @@ const table = new Table({
 
 function getProduct(answers) {
     console.log("USER ANSWERS: ", answers);
-    connection.query("SELECT * FROM products AS foundProduct where item_id = ?", [answers.item.id], function(err, res) {
+    connection.query("SELECT * FROM products AS foundProduct where item_id = ?", [answers.item_id], function(err, res) {
         if (err) throw err;
         console.log("FOUND PRODUCT: ", res[0]);
         const {PRICE, STOCK_QUANTITY } = res[0];
@@ -63,7 +63,9 @@ function getProduct(answers) {
         connection.query("UPDATE table PRODUCTS SET STOCK_QUANTITY = STOCK_QUANTITY - '${answers.PRODUCT_quantity} WHERE id = '${stock_quantity}'",function(err, res){
             if(err) throw err;
             
-            console.log("Your total is...: ", data.PRICE * answers.product_quantity)
+            //do i need a connection.query(SELECT answers.PRODUCT_NAME, asnwers.product_quantity* price)?
+            console.log("Your total is...: ", product_quantity * PRICE)
+            
             
             connection.end();
         })
